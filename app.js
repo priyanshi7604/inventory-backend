@@ -70,10 +70,28 @@ const app = express();
 //     allowedHeaders: ["Content-Type", "Authorization"],
 // }));
 
-app.use(cors())
+// app.use(cors())
 // app.use(cors(corsOptions));
 // app.options("*", cors(corsOptions));
 
+const corsOptions = {
+  origin: [
+    "http://localhost:3000",
+    "http://localhost:3001",
+    "http://localhost:4000",
+    "https://inventory-management-system-0.netlify.app" // ✅ your Netlify site
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "ngrok-skip-browser-warning"
+  ],
+  credentials: true
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Handle preflight
 
 // ✅ Body parsers
 app.use(express.json());
