@@ -58,13 +58,20 @@ const crypto = require("crypto");
 const app = express();
 
 // ✅ CORS MUST BE FIRST
-const corsOptions = {
-    origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:4000"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-};
-app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+// const corsOptions = {
+//     origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:4000"],
+//     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//     credentials: true,
+// };
+
+app.use(cors({
+    origin: "*",  // ✅ allow all origins
+    methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
+// app.use(cors(corsOptions));
+// app.options("*", cors(corsOptions));
 
 
 // ✅ Body parsers
